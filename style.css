@@ -1,39 +1,51 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	box-sizing: border-box;
+}
+
 body{
-
-  background-color: black;
-
-}
-
-h1 {
-
-  color: Orange;
+	height: 100vh;
+	background-color: #f8f8f8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 }
 
-p {
-
-  border: 2px solid white;
+.container{
+	width: 450px;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 2px 2px 20px rgba(0,0,0,0.4);
+	background-color: dodgerblue;
+}
+.header h1{
+	color: white;
+	padding: 15px;
 
 }
-
-.cuerpo{
-
-    background-image:url("Linkeldn.png");
-
-    height: 200px;
-
-    background-size: bottom;
-
-    display:flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    flex-direction: column;
+.body{
+	flex: 1;
+	color:white;
+	background-color:  rgba(0,0,0,0.7);
+	padding: 20px 30px;
 
 }
+.message{
+	background-color: dodgerblue;
+	padding: 10px;
+	color: white;
+	width: fit-content;
+	border-radius: 10px;
+	margin-bottom: 15px;
 
-margin-left: -30px;
-
-
+}
+.user_message{
+	margin-left: auto;
+	background-color: white;
+	color:black;
+	
+}
