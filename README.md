@@ -1,2 +1,2 @@
 # Supragroza34.github.io
-Im just having fun btw please dont edit anything
+FreedomChat - no censorship, no drama, full chat
