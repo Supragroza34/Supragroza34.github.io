@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+  <style>
+    /* Set the background image */
+    body {
+      background-image: url('https://unsplash.com/photos/KTdzeb28jyo');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    
+    /* Center the login form */
+    #login-form {
+      width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    
+    /* Add animation to the login form */
+    #login-form {
+      animation: fadein 1s;
+    }
+    
+    /* Define the animation */
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Add animation to the login button */
+    #login-button {
+      animation: pulse 1s infinite;
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 10px 20px;
+    }
+    
+    /* Define the animation */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    /* Add styles to the labels and inputs */
+    label {
+      display: block;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    
+    /* Add styles to the form heading */
+    h1 {
+      color: #f44336;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px #fff;
+    }
+    
+  </style>
+</head>
+<body>
+  <form id="login-form" onsubmit="return login();">
+    <h1>Login</h1>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="Enter your username"><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" placeholder="Enter your password"><br>
+    <button id="login-button">Login</button>
+  </form>
+  
+  <script>
+    function login() {
+      // Get the username and password inputs
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      
+      // Check if the username and password are valid
+      if (username === 'example' && password === 'password') {
+        // Redirect to the success page
+        window.location.replace('index2.html');
+        return false;
+      } else {
+        // Show an error message and prevent the form from submitting
+        alert('Invalid username or password');
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>
