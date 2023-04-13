@@ -98,7 +98,16 @@
         // Redirect to the success page
         window.location.replace('index2.html');
         return false;
-      } else {
+      } 
+      
+      else if (username === 'JDA1' && password === 'GoodTimes1') {
+        // Redirect to the success page
+        window.location.replace('index2.html');
+        return false;
+        
+      }
+      
+      else {
         // Show an error message and prevent the form from submitting
         alert('Invalid username or password');
         return false;
