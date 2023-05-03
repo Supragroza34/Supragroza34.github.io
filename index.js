@@ -1,7 +1,6 @@
-// We enclose this in window.onload.
-// So we don't have ridiculous errors.
+
 window.onload = function() {
-  // Import the functions you need from the SDKs you need
+
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
 
@@ -40,26 +39,18 @@ window.onload = function() {
   
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  // This is very IMPORTANT!! We're going to use "db" a lot.
   var db = firebase.database()
-  // We're going to use oBjEcT OrIeNtEd PrOgRaMmInG. Lol
   class MEME_CHAT{
-    // Home() is used to create the home page
     home(){
-      // First clear the body before adding in
-      // a title and the join form
       document.body.innerHTML = ''
       this.create_title()
       this.create_join_form()
     }
-    // chat() is used to create the chat page
     chat(){
       this.create_title()
       this.create_chat()
     }
-    // create_title() is used to create the title
     create_title(){
-      // This is the title creator. 🎉
       var title_container = document.createElement('div')
       title_container.setAttribute('id', 'title_container')
       var title_inner_container = document.createElement('div')
@@ -73,9 +64,7 @@ window.onload = function() {
       title_container.append(title_inner_container)
       document.body.append(title_container)
     }
-    // create_join_form() creates the join form
     create_join_form(){
-      // YOU MUST HAVE (PARENT = THIS). OR NOT. I'M NOT YOUR BOSS!
       var parent = this;
 
       var join_container = document.createElement('div')
@@ -97,26 +86,15 @@ window.onload = function() {
       join_input.setAttribute('id', 'join_input')
       join_input.setAttribute('maxlength', 15)
       join_input.placeholder = 'No.... It\'s Patrick Star'
-      // Every time we type into the join_input
       join_input.onkeyup  = function(){
-        // If the input we have is longer that 0 letters
         if(join_input.value.length > 0){
-          // Make the button light up
           join_button.classList.add('enabled')
-          // Allow the user to click the button
           join_button.onclick = function(){
-            // Save the name to local storage. Passing in
-            // the join_input.value
             parent.save_name(join_input.value)
-            // Remove the join_container. So the site doesn't look weird.
             join_container.remove()
-            // parent = this. But it is not the join_button
-              // It is (MEME_CHAT = this).
             parent.create_chat()
           }
         }else{
-          // If the join_input is empty then turn off the
-          // join button
           join_button.classList.remove('enabled')
         }
       }
@@ -128,9 +106,7 @@ window.onload = function() {
       join_container.append(join_inner_container)
       document.body.append(join_container)
     }
-    // create_load() creates a loading circle that is used in the chat container
     create_load(container_id){
-      // YOU ALSO MUST HAVE (PARENT = THIS). BUT IT'S WHATEVER THO.
       var parent = this;
 
       // This is a loading function. Something cool to have.
@@ -191,13 +167,9 @@ window.onload = function() {
             if(chat_input.value.length <= 0){
               return
             }
-            // Enable the loading circle in the 'chat_content_container'
             parent.create_load('chat_content_container')
-            // Send the message. Pass in the chat_input.value
             parent.send_message(chat_input.value)
-            // Clear the chat input box
             chat_input.value = ''
-            // Focus on the input just after
             chat_input.focus()
           }
         }else{
@@ -228,18 +200,11 @@ window.onload = function() {
       // then we "refresh" and get the chat data from Firebase
       parent.refresh_chat()
     }
-    // Save name. It literally saves the name to localStorage
     save_name(name){
-      // Save name to localStorage
       localStorage.setItem('name', name)
     }
-    // Sends message/saves the message to firebase database
     send_message(message){
       var parent = this
-      // if the local storage name is null and there is no message
-      // then return/don't send the message. The user is somehow hacking
-      // to send messages. Or they just deleted the
-      // localstorage themselves. But hacking sounds cooler!!
       if(parent.get_name() == null && message == null){
         return
       }
@@ -254,7 +219,6 @@ window.onload = function() {
           index: index
         })
         .then(function(){
-          // After we send the chat refresh to get the new messages
           parent.refresh_chat()
         })
       })
@@ -277,28 +241,22 @@ window.onload = function() {
       db.ref('chats/').on('value', function(messages_object) {
         // When we get the data clear chat_content_container
         chat_content_container.innerHTML = ''
-        // if there are no messages in the chat. Retrun . Don't load anything
         if(messages_object.numChildren() == 0){
           return
         }
-
-        // OK! SO IF YOU'RE A ROOKIE CODER. THIS IS GOING TO BE
-        // SUPER EASY-ISH! I THINK. MAYBE NOT. WE'LL SEE!
 
         // convert the message object values to an array.
         var messages = Object.values(messages_object.val());
         var guide = [] // this will be our guide to organizing the messages
         var unordered = [] // unordered messages
-        var ordered = [] // we're going to order these messages
+        var ordered = [] // order
 
         for (var i, i = 0; i < messages.length; i++) {
-          // The guide is simply an array from 0 to the messages.length
           guide.push(i+1)
-          // unordered is the [message, index_of_the_message]
           unordered.push([messages[i], messages[i].index]);
         }
 
-        // Now this is straight up from stack overflow 🤣
+        // Robbed from SOF
         // Sort the unordered messages by the guide
         guide.forEach(function(key) {
           var found = false
@@ -314,7 +272,7 @@ window.onload = function() {
           })
         })
 
-        // Now we're done. Simply display the ordered messages
+        // Order messages
         ordered.forEach(function(data) {
           var name = data.name
           var message = data.message
@@ -346,17 +304,14 @@ window.onload = function() {
 
           chat_content_container.append(message_container)
         });
-        // Go to the recent message at the bottom of the container
         chat_content_container.scrollTop = chat_content_container.scrollHeight;
     })
 
     }
   }
-  // So we've "built" our app. Let's make it work!!
   var app = new MEME_CHAT()
   // If we have a name stored in localStorage.
   // Then use that name. Otherwise , if not.
-  // Go to home.
   if(app.get_name() != null){
     app.chat()
   }
